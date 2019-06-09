@@ -78,22 +78,30 @@ public class Payroll {
 	//Set Employee Status 
 	public static void setEmployeeStatus()
 	{
-		System.out.println("Status Employee Menjadi Full Time Atau Part Time?");
-		String inputStatus = scanner.nextLine();
+		if(employeeList.size() == 0)
+		{
+			System.out.println("Tidak Ada Employee");
+		}
+		else
+		{
+			System.out.println("Status Employee Menjadi Full Time Atau Part Time?");
+			String inputStatus = scanner.nextLine();
+			
+			if(inputStatus.equalsIgnoreCase("Full Time"))
+			{
+				setEmployeeFullTime();
+			}
+			else if(inputStatus.equalsIgnoreCase("Part Time"))
+			{
+				setEmployeePartTime();
+			}
+			else 
+			{
+				System.out.println("Input salah. Masukkan \"Full Time\" atau \"Part Time\" ");
+				setEmployeeStatus();
+			}
+		}
 		
-		if(inputStatus.equalsIgnoreCase("Full Time"))
-		{
-			setEmployeeFullTime();
-		}
-		else if(inputStatus.equalsIgnoreCase("Part Time"))
-		{
-			setEmployeePartTime();
-		}
-		else 
-		{
-			System.out.println("Input salah. Masukkan \"Full Time\" atau \"Part Time\" ");
-			setEmployeeStatus();
-		}
 		
 
 	}
@@ -103,11 +111,11 @@ public class Payroll {
 		System.out.println("Input Nomor Employee yang hendak dijadikan Full Time Employee");
 		int inputNomorEmployee = scanner.nextInt();
 		scanner.nextLine();
-//		if(inputNomorEmployee <= 0 || inputNomorEmployee > employeeList.size())
-//		{
-//			System.out.println("Employee tidak ditemukan");
-//			setEmployeeFullTime();
-//		}
+		if(inputNomorEmployee <= 0 || inputNomorEmployee > employeeList.size())
+		{
+			System.out.println("Employee tidak ditemukan");
+			setEmployeeStatus();
+		}
 		
 		Employee obtainedEmployee = employeeList.get(inputNomorEmployee);
 		
