@@ -114,34 +114,36 @@ public class Payroll {
 		if(inputNomorEmployee <= 0 || inputNomorEmployee > employeeList.size())
 		{
 			System.out.println("Employee tidak ditemukan");
-			setEmployeeStatus();
+		}
+		else
+		{
+			Employee obtainedEmployee = employeeList.get(inputNomorEmployee);
+			
+			
+			
+			System.out.println("Input Gaji Per Bulan Employee ini");
+			BigDecimal inputGaji = scanner.nextBigDecimal();
+			scanner.nextLine();
+			System.out.println("Input Persentase Tunjangan Employee Ini");
+			int percentage = scanner.nextInt();
+			scanner.nextLine();
+			
+			FullTimeEmployee newFullTime = new FullTimeEmployee(obtainedEmployee.getNomorKaryawan(), obtainedEmployee.getNamaDepan(), obtainedEmployee.getNamaBelakang(), 
+					obtainedEmployee.getJenisKelamin(), obtainedEmployee.getTanggalLahir(), obtainedEmployee.getTempatLahir(),
+					obtainedEmployee.getNoKtp(), obtainedEmployee.getPekerjaan(), obtainedEmployee.getTanggalMulaiBekerja(),
+					obtainedEmployee.getStatusKaryawan(), inputGaji, percentage);
+			
+			newFullTime.setStatusKaryawan("Full Time");
+			newFullTime.setGajiPokokPerBulan(inputGaji);
+			newFullTime.setPersentaseTunjangan(percentage);
+			
+			obtainedEmployee.setStatusKaryawan("Full Time Employee");
+			employeeList.replace(obtainedEmployee.getNomorKaryawan(), obtainedEmployee);
+			
+			int generateKey = fullTimeEmployeeList.size() + 1;
+			fullTimeEmployeeList.put(generateKey, newFullTime);
 		}
 		
-		Employee obtainedEmployee = employeeList.get(inputNomorEmployee);
-		
-		
-		
-		System.out.println("Input Gaji Per Bulan Employee ini");
-		BigDecimal inputGaji = scanner.nextBigDecimal();
-		scanner.nextLine();
-		System.out.println("Input Persentase Tunjangan Employee Ini");
-		int percentage = scanner.nextInt();
-		scanner.nextLine();
-		
-		FullTimeEmployee newFullTime = new FullTimeEmployee(obtainedEmployee.getNomorKaryawan(), obtainedEmployee.getNamaDepan(), obtainedEmployee.getNamaBelakang(), 
-				obtainedEmployee.getJenisKelamin(), obtainedEmployee.getTanggalLahir(), obtainedEmployee.getTempatLahir(),
-				obtainedEmployee.getNoKtp(), obtainedEmployee.getPekerjaan(), obtainedEmployee.getTanggalMulaiBekerja(),
-				obtainedEmployee.getStatusKaryawan(), inputGaji, percentage);
-		
-		newFullTime.setStatusKaryawan("Full Time");
-		newFullTime.setGajiPokokPerBulan(inputGaji);
-		newFullTime.setPersentaseTunjangan(percentage);
-		
-		obtainedEmployee.setStatusKaryawan("Full Time Employee");
-		employeeList.replace(obtainedEmployee.getNomorKaryawan(), obtainedEmployee);
-		
-		int generateKey = fullTimeEmployeeList.size() + 1;
-		fullTimeEmployeeList.put(generateKey, newFullTime);
 		
 	}
 	
@@ -150,30 +152,40 @@ public class Payroll {
 		System.out.println("Input Nomor Employee yang hendak dijadikan Part Time Employee");
 		int inputNomorEmployee = scanner.nextInt();
 		scanner.nextLine();
-		Employee obtainedEmployee = employeeList.get(inputNomorEmployee);
+		
+		if(inputNomorEmployee <= 0 || inputNomorEmployee > employeeList.size())
+		{
+			System.out.println("Employee tidak ditemukan");
+		}
+		else
+		{
+			Employee obtainedEmployee = employeeList.get(inputNomorEmployee);
 
-		System.out.println("Input Gaji Per Hari Employee ini");
-		BigDecimal inputGaji = scanner.nextBigDecimal();
-		scanner.nextLine();
+			System.out.println("Input Gaji Per Hari Employee ini");
+			BigDecimal inputGaji = scanner.nextBigDecimal();
+			scanner.nextLine();
+			
+			System.out.println("Input Total Hari Bekerja Employee Ini");
+			int totalHari = scanner.nextInt();
+			scanner.nextLine();
+			
+			PartTimeEmployee newPartTime = new PartTimeEmployee(obtainedEmployee.getNomorKaryawan(), obtainedEmployee.getNamaDepan(), obtainedEmployee.getNamaBelakang(), 
+					obtainedEmployee.getJenisKelamin(), obtainedEmployee.getTanggalLahir(), obtainedEmployee.getTempatLahir(),
+					obtainedEmployee.getNoKtp(), obtainedEmployee.getPekerjaan(), obtainedEmployee.getTanggalMulaiBekerja(),
+					obtainedEmployee.getStatusKaryawan(), inputGaji, totalHari);
+			
+			newPartTime.setStatusKaryawan("Part Time");
+			newPartTime.setGajiPerHari(inputGaji);
+			newPartTime.setTotalHariBekerjaPerBulan(totalHari);
+			
+			obtainedEmployee.setStatusKaryawan("Part Time Employee");
+			employeeList.replace(obtainedEmployee.getNomorKaryawan(), obtainedEmployee);
+			
+			int generateKey = partTimeEmployeeList.size() + 1;
+			partTimeEmployeeList.put(generateKey, newPartTime);
+		}
 		
-		System.out.println("Input Total Hari Bekerja Employee Ini");
-		int totalHari = scanner.nextInt();
-		scanner.nextLine();
 		
-		PartTimeEmployee newPartTime = new PartTimeEmployee(obtainedEmployee.getNomorKaryawan(), obtainedEmployee.getNamaDepan(), obtainedEmployee.getNamaBelakang(), 
-				obtainedEmployee.getJenisKelamin(), obtainedEmployee.getTanggalLahir(), obtainedEmployee.getTempatLahir(),
-				obtainedEmployee.getNoKtp(), obtainedEmployee.getPekerjaan(), obtainedEmployee.getTanggalMulaiBekerja(),
-				obtainedEmployee.getStatusKaryawan(), inputGaji, totalHari);
-		
-		newPartTime.setStatusKaryawan("Part Time");
-		newPartTime.setGajiPerHari(inputGaji);
-		newPartTime.setTotalHariBekerjaPerBulan(totalHari);
-		
-		obtainedEmployee.setStatusKaryawan("Part Time Employee");
-		employeeList.replace(obtainedEmployee.getNomorKaryawan(), obtainedEmployee);
-		
-		int generateKey = partTimeEmployeeList.size() + 1;
-		partTimeEmployeeList.put(generateKey, newPartTime);
 		
 	}
 	
